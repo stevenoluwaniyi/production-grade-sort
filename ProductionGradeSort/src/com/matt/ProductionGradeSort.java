@@ -52,8 +52,7 @@ public class ProductionGradeSort {
 	
 	public static void main(String[] args) {
 		int[] array = new int[]{4,5,3};
-//		mergesort(array);
-		Arrays.sort(array);
+		mergesort(array);
 		System.out.println(Arrays.toString(array));
 	}
 
