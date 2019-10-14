@@ -13,7 +13,7 @@ def get_numbers_or_default(event):
     if query_string is not None:
         numbers_string = query_string["numbers"]
         if numbers_string is not None:
-            numbers = query_string_to_list(query_string)
+            numbers = query_string_to_list(numbers_string)
         else:
             numbers = [3, 2, 1]
     else:
