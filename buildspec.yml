@@ -1,0 +1,7 @@
+version: 0.2
+
+artifacts:
+  type: zip
+  files:
+    - 'requirements.txt'
+    - 'application.py'
