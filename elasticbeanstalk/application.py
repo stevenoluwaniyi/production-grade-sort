@@ -5,6 +5,7 @@ application = Flask(__name__)
 
 
 @application.route('/')
+@application.route('/sort')
 def sort():
     query = request.args.get('numbers')
     numbers = [3, 2, 1]
