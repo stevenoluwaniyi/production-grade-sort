@@ -12,3 +12,4 @@ artifacts:
   files:
     - template.yml
     - outputtemplate.yml
+  base-directory: lambda
