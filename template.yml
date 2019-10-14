@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Sorts numbers
+Resources:
+  SortFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: handler.sort
+      Runtime: python3.7
+      CodeUri: ./
+      Events:
+        SortApi:
+          Type: Api
+          Properties:
+            Path: /sort
+            Method: GET
