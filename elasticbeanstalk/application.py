@@ -8,8 +8,9 @@ application = Flask(__name__)
 @application.route('/sort')
 def sort():
     query = request.args.get('numbers')
-    numbers = [3, 2, 1]
-    if query is not None:
+    if query is None:
+        numbers = [3, 2, 1]
+    else:
         numbers = query_string_to_list(query)
     numbers.sort()
     return create_response(numbers)
