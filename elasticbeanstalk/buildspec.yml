@@ -10,3 +10,4 @@ artifacts:
   files:
     - 'requirements.txt'
     - 'application.py'
+  base-directory: elasticbeanstalk
