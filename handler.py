@@ -1,7 +1,7 @@
 import json
 
 
-def sort(event):
+def sort(event, context):
     numbers = get_numbers_or_default(event)
     numbers.sort()
     return create_response(numbers)
