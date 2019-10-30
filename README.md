@@ -18,6 +18,7 @@ At the end you'll have two API's that sort a list of numbers:
 git clone https://github.com/muymoo/production-grade-sort.git
 cd production-grade-sort
 ```
+(#elastic-beanstalk)
 ### Elastic Beanstalk
 1. `cd elasticbeanstalk`
 2. Create zip: `zip -X ../elasticbeanstalk application.py requirements.txt` 
@@ -47,7 +48,25 @@ cd production-grade-sort
 
 ## Day 2: Automated Pipeline 
 ### Elastic Beanstalk
-https://aws.amazon.com/getting-started/tutorials/continuous-deployment-pipeline/
+1. Follow steps from Day 1 - ["Elastic Beanstalk"](#elastic-beanstalk)
+2. Fork this repository
+3. [Code Pipeline](http://console.aws.amazon.com/codepipeline)
+4. "Create New Pipeline"
+5. Name: `eb-production-sort`, Role: Create New
+6. Source Provider: GitHub
+7. "Connect to GitHub"
+8. ![Repository: <your username>/production-grade-sort](images/github.png)
+9. CodeBuild: "Create Project"
+   1. Name: `eb-production-sort-build`
+   2. Env: `Managed Image` > `Amazon Linux 2`
+   3. Runtimes: `Standard`
+   ![Use default or only options from drop downs](images/code-build.png)
+   4. Use buildspec file. Location: `elasticbeanstalk/buildspec.yml`
+   5. "Continue to CodePipeline"
+10. Deploy to ElasticBeanstalk environment we careated in step #1
+![Deploy to EB environment created in step #1](images/deploy.png)
+11. "Next", "Create Pipeline"
 
+Inspired by: https://aws.amazon.com/getting-started/tutorials/continuous-deployment-pipeline/ (uses PHP instead of Python)
 ### AWS Lambda
 https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html
