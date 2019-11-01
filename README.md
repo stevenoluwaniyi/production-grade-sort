@@ -69,4 +69,12 @@ cd production-grade-sort
 
 Inspired by: https://aws.amazon.com/getting-started/tutorials/continuous-deployment-pipeline/ (uses PHP instead of Python)
 ### AWS Lambda
+1. [Code Pipeline](http://console.aws.amazon.com/codepipeline)
+2. "Create New Pipeline"
+3. ![Use defaults for pipeline](images/lambda-pipeline.png)
+4. Source Provdier: GitHub"
+5. "Connect to GitHub"
+6. 
+
+
 https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html
