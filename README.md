@@ -113,25 +113,26 @@ Inspired by: https://aws.amazon.com/getting-started/tutorials/continuous-deploym
    3. Runtimes: `Standard`, Use defaults in drop downs
    4. Use buildspec file. Location: `lambda/buildspec.yml`
    5. "Continue to CodePipeline"
-9. Deploy Provider: CloudFormation
+
+9. Deploy Provider CloudFormation
    1. Action Mode: `Create or replace a change set`
    2. Stack Name: `lambda-pipeline-stack`
    3. Changeset Name: `lambda-pipeline-changeset`
-   4. Template – BuildArtifact::outputtemplate.yml
-   5. Capabilities – CAPABILITY_IAM
-   6. Role name – cfn-lambda-pipeline
-10. "Create Pipeline"
-11. Update build role to allow S3 access
-   1. [Roles](https://console.aws.amazon.com/iam/home#/roles)
-   2. Update role `codebuild-lambda-production-sort-build-service-role` to have `AmazonS3FullAccess` policy.
-12. Edit deploy stage. Add new action group:
+   4. Template: `BuildArtifact::outputtemplate.yml`
+   5. Capabilities: `CAPABILITY_IAM`
+   6. Role name: `cfn-lambda-pipeline`
+9. Create Pipeline
+   1. Update build role to allow S3 access
+   2. Update [Roles](https://console.aws.amazon.com/iam/home)
+   3. Update role `codebuild-lambda-production-sort-build-service-role` to have `AmazonS3FullAccess` policy.
+9. Edit deploy stage. Add new action group:
    1. Action name: `execute-changeset`
    2. Action provider: `AWS CloudFormation`
    3. Input artifacts: `BuildArtifact`
    4. Action mode: `Execute a change set`
    5. Stack name: `lambda-pipeline-stack`
    6. Change set name: `lambda-pipeline-changeset`
-13. Release Changes
-14. [Lambda](https://console.aws.amazon.com/lambda/home)
-15. Test by hitting API Gateway URL
+12. Release Changes
+13. [Lambda](https://console.aws.amazon.com/lambda/home)
+14. Test by hitting API Gateway URL
 https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html
