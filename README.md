@@ -102,12 +102,12 @@ Inspired by: https://aws.amazon.com/getting-started/tutorials/continuous-deploym
    }
    ```
 2. [Code Pipeline](http://console.aws.amazon.com/codepipeline)
-2. "Create New Pipeline"
-3. ![Use defaults for pipeline](images/lambda-pipeline.png)
-4. Source Provdier: GitHub"
-5. "Connect to GitHub"
-6. Use your repository from Elastic Beanstalk: Step #2
-7. CodeBuild "Create Project"
+3. "Create New Pipeline"
+4. ![Use defaults for pipeline](images/lambda-pipeline.png)
+5. Source Provdier: GitHub"
+6. "Connect to GitHub"
+7. Use your repository from Elastic Beanstalk: Step #2
+8. CodeBuild "Create Project"
    1. Name: `lambda-production-sort-build`
    2. Env: `Managed Image` > `Amazon Linux 2`
    3. Runtimes: `Standard`, Use defaults in drop downs
@@ -120,6 +120,16 @@ Inspired by: https://aws.amazon.com/getting-started/tutorials/continuous-deploym
    4. Template – BuildArtifact::outputtemplate.yml
    5. Capabilities – CAPABILITY_IAM
    6. Role name – cfn-lambda-pipeline
-10. Update build=
+10. "Create Pipeline"
+11. Update build role to allow S3 access
+   1. [Roles](https://console.aws.amazon.com/iam/home#/roles)
+   2. Update role `codebuild-lambda-production-sort-build-service-role` to have `AmazonS3FullAccess` policy.
+12. Edit deploy stage. Add action:
+   1. Action name: `execute-changeset`
+   2. Action provider: `AWS CloudFormation`
+   3. Input artifacts: `BuildArtifact`
+   4. Action mode: `Execute a change set`
+   5. Stack name: `lambda-pipeline-stack`
+   6. Change set name: `lambda-pipeline-changeset`
 
 https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html
