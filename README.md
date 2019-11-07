@@ -59,13 +59,13 @@ cd production-grade-sort
 9. CodeBuild: "Create Project"
    1. Name: `eb-production-sort-build`
    2. Env: `Managed Image` > `Amazon Linux 2`
-   3. Runtimes: `Standard`
-   ![Use default or only options from drop downs](images/code-build.png)
+   3. Runtimes: `Standard`, Use defaults in drop downs
    4. Use buildspec file. Location: `elasticbeanstalk/buildspec.yml`
    5. "Continue to CodePipeline"
 10. Deploy to ElasticBeanstalk environment we careated in step #1
 ![Deploy to EB environment created in step #1](images/deploy.png)
 11. "Next", "Create Pipeline"
+12. Test by committing a change to your repo. Your pipeline should start automatically.
 
 Inspired by: https://aws.amazon.com/getting-started/tutorials/continuous-deployment-pipeline/ (uses PHP instead of Python)
 ### AWS Lambda
