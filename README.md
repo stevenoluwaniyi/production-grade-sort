@@ -124,12 +124,14 @@ Inspired by: https://aws.amazon.com/getting-started/tutorials/continuous-deploym
 11. Update build role to allow S3 access
    1. [Roles](https://console.aws.amazon.com/iam/home#/roles)
    2. Update role `codebuild-lambda-production-sort-build-service-role` to have `AmazonS3FullAccess` policy.
-12. Edit deploy stage. Add action:
+12. Edit deploy stage. Add new action group:
    1. Action name: `execute-changeset`
    2. Action provider: `AWS CloudFormation`
    3. Input artifacts: `BuildArtifact`
    4. Action mode: `Execute a change set`
    5. Stack name: `lambda-pipeline-stack`
    6. Change set name: `lambda-pipeline-changeset`
-
+13. Release Changes
+14. [Lambda](https://console.aws.amazon.com/lambda/home)
+15. Test by hitting API Gateway URL
 https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html
