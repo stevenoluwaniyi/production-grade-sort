@@ -69,12 +69,57 @@ cd production-grade-sort
 
 Inspired by: https://aws.amazon.com/getting-started/tutorials/continuous-deployment-pipeline/ (uses PHP instead of Python)
 ### AWS Lambda
-1. [Code Pipeline](http://console.aws.amazon.com/codepipeline)
+1. In [IAM](https://console.aws.amazon.com/iam/home), create role:
+   1. Trusted entity – AWS CloudFormation
+   2. Permissions – AWSLambdaExecute
+   3. Role name – cfn-lambda-pipeline
+   4. Inline Policy:
+   ```
+   {
+    "Statement": [
+        {
+            "Action": [
+                "apigateway:*",
+                "codedeploy:*",
+                "lambda:*",
+                "cloudformation:CreateChangeSet",
+                "iam:GetRole",
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:PutRolePolicy",
+                "iam:AttachRolePolicy",
+                "iam:DeleteRolePolicy",
+                "iam:DetachRolePolicy",
+                "iam:PassRole",
+                "s3:GetObjectVersion",
+                "s3:GetBucketVersioning"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        }
+    ],
+    "Version": "2012-10-17"
+   }
+   ```
+2. [Code Pipeline](http://console.aws.amazon.com/codepipeline)
 2. "Create New Pipeline"
 3. ![Use defaults for pipeline](images/lambda-pipeline.png)
 4. Source Provdier: GitHub"
 5. "Connect to GitHub"
-6. 
-
+6. Use your repository from Elastic Beanstalk: Step #2
+7. CodeBuild "Create Project"
+   1. Name: `lambda-production-sort-build`
+   2. Env: `Managed Image` > `Amazon Linux 2`
+   3. Runtimes: `Standard`, Use defaults in drop downs
+   4. Use buildspec file. Location: `lambda/buildspec.yml`
+   5. "Continue to CodePipeline"
+9. Deploy Provider: CloudFormation
+   1. Action Mode: `Create or replace a change set`
+   2. Stack Name: `lambda-pipeline-stack`
+   3. Changeset Name: `lambda-pipeline-changeset`
+   4. Template – BuildArtifact::outputtemplate.yml
+   5. Capabilities – CAPABILITY_IAM
+   6. Role name – cfn-lambda-pipeline
+10. Update build=
 
 https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html
