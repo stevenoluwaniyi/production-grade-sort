@@ -9,7 +9,7 @@ application = Flask(__name__)
 def sort():
     query = request.args.get('numbers')
     if query is None:
-        numbers = [3, 2, 1]
+        numbers = [4, 3, 2, 1]
     else:
         numbers = query_string_to_list(query)
     numbers.sort()
